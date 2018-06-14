@@ -2,10 +2,11 @@ package com.cattsoft.security.filter;
 
 import com.cattsoft.security.entity.JWTToken;
 import com.cattsoft.security.entity.Result;
-import com.google.gson.Gson;
+import com.cattsoft.security.utils.ResponseUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpStatus;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,9 +47,8 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         String token = req.getHeader("token");
         if(StringUtils.isBlank(token)){
             HttpServletResponse httpResponse = (HttpServletResponse) response;
-            String json = new Gson().toJson(Result.error(HttpStatus.SC_UNAUTHORIZED, "token失效"));
-            httpResponse.getWriter().print(json);
-
+            String json = JSONObject.valueToString(Result.error(HttpStatus.SC_UNAUTHORIZED, "token失效"));
+            ResponseUtil.write((HttpServletResponse) response, json);
             return false;
         }
 

@@ -2,6 +2,7 @@ package com.cattsoft.security.controller;
 
 import com.cattsoft.security.entity.ManagerInfo;
 import com.cattsoft.security.service.ManagerInfoService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +24,7 @@ public class ManagerInfoController {
     @Resource
     private ManagerInfoService managerInfoService;
 
-    @RequestMapping("/list")
+    @GetMapping("/list")
     public List<ManagerInfo> list() {
         ManagerInfo managerInfo = new ManagerInfo();
         managerInfo.setId(1);

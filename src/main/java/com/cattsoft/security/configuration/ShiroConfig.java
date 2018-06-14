@@ -48,12 +48,13 @@ public class ShiroConfig {
         // 拦截器
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
 
-        // 其他的
-        filterChainDefinitionMap.put("/**", "jwt");
 
         // 访问401和404页面不通过我们的Filter
+        filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/401", "anon");
         filterChainDefinitionMap.put("/404", "anon");
+        // 其他的
+        filterChainDefinitionMap.put("/**", "jwt");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;

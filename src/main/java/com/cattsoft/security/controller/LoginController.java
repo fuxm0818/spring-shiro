@@ -8,10 +8,7 @@ import org.apache.shiro.authz.UnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -32,7 +29,7 @@ public class LoginController {
 
     private static final Logger _logger = LoggerFactory.getLogger(LoginController.class);
 
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public Result login(@RequestParam("username") String username,
                         @RequestParam("password") String password) {
         ManagerInfo user = managerInfoService.findByUsername(username);
